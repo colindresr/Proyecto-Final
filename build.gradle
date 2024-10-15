@@ -1,0 +1,45 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.proyecto'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security:3.2.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// JWT para autenticación basada en tokens
+	implementation 'io.jsonwebtoken:jjwt:0.9.1' // Usar una única versión de JJWT
+
+	// JAXB
+	implementation "jakarta.xml.bind:jakarta.xml.bind-api:3.0.1" // Usar la versión más reciente
+	implementation "org.glassfish.jaxb:jaxb-runtime:3.0.1"
+
+	// Seguridad
+	implementation 'org.springframework.security:spring-security-crypto:6.0.1' // Versión consistente
+	implementation 'org.springframework.security:spring-security-config:6.2.2' // Configuración de seguridad
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
