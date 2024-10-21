@@ -1,10 +1,12 @@
 package com.proyecto.api.modelo.mongo;
 
+import com.proyecto.api.dto.UserRepositoryDto;
 import com.proyecto.api.modelo.EnumRol;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +34,16 @@ public class UserMongo {
         this.password = new BCryptPasswordEncoder().encode(password);
         this.roles = new ArrayList<>(Collections.singleton(EnumRol.USER));
     }
+
+    public UserMongo(UserRepositoryDto userRepositoryDto) {
+        this.name = userRepositoryDto.getName();
+        System.out.println("Password userMongo 1 "+ userRepositoryDto.getPassword());
+        this.password = new BCryptPasswordEncoder().encode(userRepositoryDto.getPassword());
+        System.out.println("Constructor 2 " + this.password);
+        this.email = userRepositoryDto.getEmail();
+        this.roles = new ArrayList<>(Collections.singleton(EnumRol.USER));
+    }
+
 
     // -------------------------- Getters y setters --------------------------------------
     public List<EnumRol> getRoles() {
@@ -68,6 +80,12 @@ public class UserMongo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void updateUser(UserRepositoryDto user){
+        setName(user.getName());
+        setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        setEmail(user.getEmail());
     }
 
     // -------------------------- toString --------------------------------------
