@@ -1,42 +1,39 @@
 package com.proyecto.api.dto;
 
-import com.proyecto.api.modelo.EnumRol;
+
+import com.proyecto.api.modelo.mongo.UserMongo;
+import com.proyecto.api.modelo.sql.User;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class UserRepositoryDto implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class UserCreateDto implements Serializable {
+    private static final long serialVersionUID= 1L;
 
     private String id;
     private String name;
     private String email;
     private String password;
 
-    private List<EnumRol> roles;
-
-    public UserRepositoryDto(String id, String name, String email, String password, List<EnumRol> roles) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+    public UserCreateDto(User user) {
+        this.id = String.valueOf(user.getId());
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
     }
 
-    public UserRepositoryDto(String id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public UserCreateDto(UserMongo user){
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
     }
 
-    public UserRepositoryDto(UserRegisterDto userRegisterDto) {
-        this.name = userRegisterDto.getName();
-        this.password = userRegisterDto.getPassword();
-        this.email = userRegisterDto.getEmail();
+    public UserCreateDto(UserRepositoryDto user){
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
     }
-
 
     // ----------------------------------------------------------------  Getters & Setters ----------------------------------------------------------------
 
@@ -73,23 +70,15 @@ public class UserRepositoryDto implements Serializable {
         this.password = password;
     }
 
-    public List<EnumRol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<EnumRol> roles) {
-        this.roles = roles;
-    }
-
     // ----------------------------------------------------------------  toString() ----------------------------------------------------------------
+
     @Override
     public String toString() {
-        return "UserRepositoryDto{" +
+        return "UserCreateDto{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 }
