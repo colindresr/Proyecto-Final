@@ -4,11 +4,13 @@ import com.proyecto.api.dto.UserRepositoryDto;
 import com.proyecto.api.dto.mapper.DataMapper;
 import com.proyecto.api.modelo.mongo.UserMongo;
 import com.proyecto.api.repository.UserRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Repository
 public class UserRepositoryMongoImpl implements UserRepository {
 
     private final UserRepositoryMongo userRepositoryMongo;

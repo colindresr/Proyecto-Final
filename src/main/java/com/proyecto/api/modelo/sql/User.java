@@ -1,5 +1,6 @@
 package com.proyecto.api.modelo.sql;
 
+import com.proyecto.api.dto.UserRepositoryDto;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -47,6 +48,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public User(UserRepositoryDto userRepositoryDto) {
+        this.name = userRepositoryDto.getName();
+        System.out.println("Password user 2 "+ userRepositoryDto.getPassword());
+        this.password = new BCryptPasswordEncoder().encode(userRepositoryDto.getPassword());
+        System.out.println("Constructor user 2 "+ this.password);
+        this.email = userRepositoryDto.getEmail();
+    }
+
     public Long getId() {
         return id;
     }
@@ -85,6 +94,12 @@ public class User implements Serializable {
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    public void updateUser(UserRepositoryDto user){
+        setName(user.getName());
+        setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        setEmail(user.getEmail());
     }
 
     @Override

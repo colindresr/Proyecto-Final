@@ -5,15 +5,17 @@ import com.proyecto.api.dto.UserRegisterDto;
 import com.proyecto.api.dto.UserRepositoryDto;
 import com.proyecto.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserServiceImpl(@Qualifier("userMongoRepositoryImpl") UserRepository userRepository) {
+    public UserServiceImpl(@Qualifier("userRepositoryMongoImpl") UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

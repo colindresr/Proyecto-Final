@@ -4,10 +4,12 @@ import com.proyecto.api.dto.UserRepositoryDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.Date;
 
+@Component
 public class OperationJwtImpl implements OperationJwt{
 
     @Value("${jwt.secret.key}")
