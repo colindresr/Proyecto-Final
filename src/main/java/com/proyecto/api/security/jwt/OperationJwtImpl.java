@@ -1,6 +1,5 @@
 package com.proyecto.api.security.jwt;
 
-import com.proyecto.api.dto.UserRepositoryDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;

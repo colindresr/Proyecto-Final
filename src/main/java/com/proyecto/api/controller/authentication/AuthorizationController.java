@@ -1,6 +1,5 @@
     package com.proyecto.api.controller.authentication;
 
-    import com.proyecto.api.dto.UserRepositoryDto;
     import com.proyecto.api.dto.authentication.LoginDto;
     import com.proyecto.api.dto.authentication.TokenDto;
     import com.proyecto.api.security.encrypt.PasswordEncryptService;

@@ -1,10 +1,8 @@
 package com.proyecto.api.repository.postgres.user;
 
-import com.proyecto.api.dto.UserRepositoryDto;
 import com.proyecto.api.dto.mapper.DataMapper;
 import com.proyecto.api.modelo.sql.Rol;
 import com.proyecto.api.modelo.sql.User;
-import com.proyecto.api.repository.UserRepository;
 import com.proyecto.api.repository.postgres.rol.RolRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 

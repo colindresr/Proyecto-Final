@@ -1,9 +1,7 @@
-package com.proyecto.api.modelo.mongo;
+package com.proyecto.api.modelo.sql;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,37 +9,38 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Data
-@Document(collection = "users")
-public class UserMongo implements UserDetails {
+@Entity
+@Table(name = "users")
+public class UserSql implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
+    private Long id;
 
     private String name;
     private String username;
     private String email;
     private String password;
 
-    @Field(name = "date_creation") // Mapea el campo "date_creation" en MongoDB a esta propiedad.
-    private LocalDateTime dateCreation; // Fecha de creación de la cuenta del usuario.
+    @Column(name = "date_creation")
+    private LocalDateTime dateCreation;
+    @Column(name = "date_update")
+    private LocalDateTime dateUpdate;
 
-    @Field(name = "date_updated") // Mapea el campo "date_updated" en MongoDB a esta propiedad.
-    private LocalDateTime dateUpdate; // Fecha de la última actualización de la cuenta del usuario.
-
-    private Set<RolMongo> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role")
+    )
+    private Set<Rol> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
-    }
-
-    @Override
-    public String getPassword() {
-        return "";
-    }
-
-    @Override
-    public String getUsername() {
-        return "";
     }
 
     @Override
@@ -64,6 +63,3 @@ public class UserMongo implements UserDetails {
         return UserDetails.super.isEnabled();
     }
 }
-
-
-

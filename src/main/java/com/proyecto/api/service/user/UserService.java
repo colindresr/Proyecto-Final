@@ -1,9 +1,5 @@
 package com.proyecto.api.service.user;
 
-import com.proyecto.api.dto.UserCreateDto;
-import com.proyecto.api.dto.UserRegisterDto;
-import com.proyecto.api.dto.UserRepositoryDto;
-
 import java.util.List;
 
 public interface UserService {

@@ -1,10 +1,7 @@
 package com.proyecto.api.controller.user;
 
 
-import com.proyecto.api.dto.UserCreateDto;
-import com.proyecto.api.dto.UserRegisterDto;
 import com.proyecto.api.service.user.UserService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
