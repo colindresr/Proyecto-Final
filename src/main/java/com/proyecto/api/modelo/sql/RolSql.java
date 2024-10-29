@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "roles")
-public class Rol  {
+public class RolSql  {
 
 
     @Id

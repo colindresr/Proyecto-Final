@@ -10,7 +10,7 @@ import java.util.Objects;
 @Data
 @Entity
 @Table(name = "loans")
-public class Loan {
+public class LoanSql {
 
 
     @Id
