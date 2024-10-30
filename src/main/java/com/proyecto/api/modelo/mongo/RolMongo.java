@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@Document(collection = "users")
+@Document(collection = "roles")
 public class RolMongo  {
 
     @Id
