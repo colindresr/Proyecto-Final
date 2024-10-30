@@ -1,13 +1,17 @@
 package com.proyecto.api.service.user;
 
+import com.proyecto.api.dto.RequestUpdate;
+import com.proyecto.api.dto.ResponseUser;
+
 import java.util.List;
 
 public interface UserService {
 
-    List<UserCreateDto> getAllUsers();
-    UserCreateDto findUserById(String idUser);
-    UserCreateDto createUser(UserRegisterDto user);
-    Boolean updateUser(String idUser, UserRegisterDto user);
-    Boolean deleteUser(String idUser);
-    UserRepositoryDto findByEmail(String email);
+    List<ResponseUser> getUsers();
+
+    ResponseUser findUserById(String idUser);
+
+    ResponseUser updateUser(String idUser, RequestUpdate userRequestUpdate);
+
+    void deleteUser(String idUser);
 }

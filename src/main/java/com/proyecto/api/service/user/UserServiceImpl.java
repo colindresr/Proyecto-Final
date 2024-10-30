@@ -1,52 +1,82 @@
 package com.proyecto.api.service.user;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+
+import com.proyecto.api.dto.RequestUpdate;
+import com.proyecto.api.dto.ResponseUser;
+import com.proyecto.api.modelo.User;
+import com.proyecto.api.repository.UserRepository;
+import com.proyecto.api.util.UserUtil;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Request;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserUtil userUtil;
 
-    public UserServiceImpl(@Qualifier("userRepositoryImpl") UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private static final String USER_NOT_FOUND = "User not found with ID: ";
+
+    @Value("${spring.profiles.active}")
+    private String profile;
+
+    @Override
+    public List<ResponseUser> getUsers() {
+        List<User> users = userRepository.getUsers();
+        return users.stream().map(userUtil::userToUserResponse).collect(Collectors.toList());
     }
 
     @Override
-    public List<UserCreateDto> getAllUsers() {
-        List<UserCreateDto> userCreatedDtos = new ArrayList<>();
-        for (UserRepositoryDto user : userRepository.getAllUsers()){
-            userCreatedDtos.add(new UserCreateDto(user));
+    public ResponseUser findUserById(String idUser) {
+        if(profile.equals("postgres")) {
+            try {
+                Long id = Long.parseLong(idUser);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid idBook format for Postgres: " + idUser);
+            }
         }
-        return userCreatedDtos;
+        User user = userRepository.findUserById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + idUser));
+        return userUtil.userToUserResponse(user);
     }
 
     @Override
-    public UserCreateDto findUserById(String idUser) {
-        return new UserCreateDto(userRepository.findUserById(idUser));
+    public ResponseUser updateUser(String idUser, RequestUpdate userRequestUpdate) {
+        if(profile.equals("postgres")) {
+            try {
+                Long id = Long.parseLong(idUser);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid idBook format for Postgres: " + idUser);
+            }
+        }
+        User user = userRepository.findUserById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + idUser));
+        user.setName(userRequestUpdate.getName());
+        user.setUsername(userRequestUpdate.getUsername());
+        user.setEmail(userRequestUpdate.getEmail());
+        User update = userRepository.updateUser(user);
+        return userUtil.userToUserResponse(update);
     }
 
     @Override
-    public UserCreateDto createUser(UserRegisterDto user) {
-        return new UserCreateDto(userRepository.createUser(new UserRepositoryDto(user)));
-    }
-
-    @Override
-    public Boolean updateUser(String idUser, UserRegisterDto user) {
-        return userRepository.updateUser(idUser, new UserRepositoryDto(user));
-    }
-
-    @Override
-    public Boolean deleteUser(String idUser) {
-        return userRepository.deleteUser(idUser);
-    }
-
-    @Override
-    public UserRepositoryDto findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public void deleteUser(String idUser) {
+        if(profile.equals("postgres")) {
+            try {
+                Long id = Long.parseLong(idUser);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid idBook format for Postgres: " + idUser);
+            }
+        }
+        userRepository.findUserById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + idUser));
+        userRepository.deleteUser(idUser);
     }
 
 }
