@@ -15,7 +15,7 @@ public class LoanMongo {
 
     @Id
     @Embedded
-    private LoanSqlId idLoan;
+    private LoanMongoId idLoan;
 
     @Field(name = "loan_date")
     private LocalDateTime loanDate;

@@ -3,6 +3,7 @@ package com.proyecto.api.util;
 import com.proyecto.api.dto.ResponseUser;
 import com.proyecto.api.modelo.Rol;
 import com.proyecto.api.modelo.User;
+import com.proyecto.api.modelo.mongo.RolMongo;
 import com.proyecto.api.modelo.mongo.UserMongo;
 import com.proyecto.api.modelo.sql.RolSql;
 import com.proyecto.api.modelo.sql.UserSql;
@@ -28,27 +29,43 @@ public class UserUtil {
         userPostgres.setPassword(user.getPassword());
         userPostgres.setDateCreation(user.getDateCreation());
         userPostgres.setDateUpdate(user.getDateUpdate());
-        Set<RolSql> rolSql = user.getRoles().stream()
+        Set<RolSql> rolesPostgres = user.getRoles().stream()
                 .map(rolUtil::rolToRolSql)
                 .collect(Collectors.toSet());
-        userPostgres.setRoles(rolSql);
+        userPostgres.setRoles(rolesPostgres);
         return userPostgres;
     }
 
-    public User userPostgresToUser(UserSql userSql) {
+    public User userPostgresToUser(UserSql userPostgres) {
         User user = new User();
-        user.setId(String.valueOf(userSql.getId()));
-        user.setName(userSql.getName());
-        user.setUsername(userSql.getUsername());
-        user.setEmail(userSql.getEmail());
-        user.setPassword(userSql.getPassword());
-        user.setDateCreation(userSql.getDateCreation());
-        user.setDateUpdate(userSql.getDateUpdate());
-        Set<Rol> roles = userSql.getRoles().stream()
+        user.setId(String.valueOf(userPostgres.getId()));
+        user.setName(userPostgres.getName());
+        user.setUsername(userPostgres.getUsername());
+        user.setEmail(userPostgres.getEmail());
+        user.setPassword(userPostgres.getPassword());
+        user.setDateCreation(userPostgres.getDateCreation());
+        user.setDateUpdate(userPostgres.getDateUpdate());
+        Set<Rol> roles = userPostgres.getRoles().stream()
                 .map(rolUtil::rolPostgresToRol)
                 .collect(Collectors.toSet());
         user.setRoles(roles);
         return user;
+    }
+
+    public UserMongo userToUserMongo(User user) {
+        UserMongo userMongo = new UserMongo();
+        userMongo.setId(user.getId());
+        userMongo.setName(user.getName());
+        userMongo.setUsername(user.getUsername());
+        userMongo.setEmail(user.getEmail());
+        userMongo.setPassword(user.getPassword());
+        userMongo.setDateCreation(user.getDateCreation());
+        userMongo.setDateUpdate(user.getDateUpdate());
+        Set<RolMongo> roles = user.getRoles().stream()
+                .map(rolUtil::rolToRoleMongo)
+                .collect(Collectors.toSet());
+        userMongo.setRoles(roles);
+        return userMongo;
     }
 
     public User userMongoToUser(UserMongo userMongo) {

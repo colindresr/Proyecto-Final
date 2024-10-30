@@ -22,7 +22,7 @@ public class UserRepositoryMongo implements UserRepository {
 
     @Override
     public User createUser(User user) {
-        UserMongo userMongo = userUtil.userMongoToUser(user);
+        UserMongo userMongo = userUtil.userToUserMongo(user);
         UserMongo newUser = mongo.save(userMongo);
         return userUtil.userMongoToUser(newUser);
     }
@@ -42,7 +42,7 @@ public class UserRepositoryMongo implements UserRepository {
 
     @Override
     public User updateUser(User user) {
-        UserMongo userMongo = userUtil.userMongoToUser(user);
+        UserMongo userMongo = userUtil.userToUserMongo(user);
         UserMongo newUser = mongo.save(userMongo);
         return userUtil.userMongoToUser(newUser);
     }

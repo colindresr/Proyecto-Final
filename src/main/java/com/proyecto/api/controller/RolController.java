@@ -44,8 +44,8 @@ public class RolController {
     }
 
     @DeleteMapping("/{idRol}")
-    public ResponseEntity<Map<String, String>> deleteRole(@PathVariable("idRole") String idRole) {
-        roleService.deleteRole(idRole); // Elimina el rol utilizando el servicio de roles.
+    public ResponseEntity<Map<String, String>> deleteRole(@PathVariable("idRol") String idRole) {
+        roleService.deleteRole(idRole);
         Map<String, String> response = new HashMap<>();
         response.put("message", "Role deleted successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);

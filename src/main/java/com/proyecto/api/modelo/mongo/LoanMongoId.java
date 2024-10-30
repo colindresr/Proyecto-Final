@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class LoanMongoId {
 
-    private Long idBook;
-    private Long idUser;
+    private String idBook;
+    private String idUser;
 }

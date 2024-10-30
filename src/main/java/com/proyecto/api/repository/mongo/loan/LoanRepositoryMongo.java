@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class LoanRepositoryMongo implements LoanRepository {
 
-    private final LoanRepositoryJpa mongo;
+    private final LoanRepositoryJpaMongo mongo;
     private final LoanUtil loanUtil;
 
     @Override

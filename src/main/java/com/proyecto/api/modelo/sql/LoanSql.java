@@ -12,7 +12,7 @@ public class LoanSql {
 
 
     @EmbeddedId
-    private Long idLoan;
+    private LoanSqlId idLoan;
 
     @Column(name = "loan_date")
     private LocalDateTime loanDate;
