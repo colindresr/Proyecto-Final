@@ -29,10 +29,11 @@ public class UserUtil {
         userPostgres.setPassword(user.getPassword());
         userPostgres.setDateCreation(user.getDateCreation());
         userPostgres.setDateUpdate(user.getDateUpdate());
-        Set<RolSql> rolesPostgres = user.getRoles().stream()
+
+        Set<RolSql> rolSql = user.getRoles().stream()
                 .map(rolUtil::rolToRolSql)
                 .collect(Collectors.toSet());
-        userPostgres.setRoles(rolesPostgres);
+        userPostgres.setRoles(rolSql);
         return userPostgres;
     }
 
@@ -45,6 +46,7 @@ public class UserUtil {
         user.setPassword(userPostgres.getPassword());
         user.setDateCreation(userPostgres.getDateCreation());
         user.setDateUpdate(userPostgres.getDateUpdate());
+
         Set<Rol> roles = userPostgres.getRoles().stream()
                 .map(rolUtil::rolPostgresToRol)
                 .collect(Collectors.toSet());

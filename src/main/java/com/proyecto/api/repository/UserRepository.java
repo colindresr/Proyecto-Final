@@ -1,7 +1,6 @@
 package com.proyecto.api.repository;
 
 import com.proyecto.api.modelo.User;
-import com.proyecto.api.modelo.sql.UserSql;
 
 import java.util.List;
 import java.util.Optional;

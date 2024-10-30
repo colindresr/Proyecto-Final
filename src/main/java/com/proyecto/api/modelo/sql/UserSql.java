@@ -37,7 +37,7 @@ public class UserSql implements UserDetails {
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_role")
     )
-    private Set<Rol> roles = new HashSet<>();
+    private Set<RolSql> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

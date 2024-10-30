@@ -54,7 +54,7 @@ public class RolRepositorySql implements RolRepository {
 
     @Override
     public Optional<Rol> findRolByName(String roleName) {
-        Optional<RolSql> rolePostgres = rolRepositoryJpa.findByRole(roleName);
+        Optional<RolSql> rolePostgres = rolRepositoryJpa.findByRol(roleName);
         return rolePostgres.map(rolUtil::rolPostgresToRol);
     }
 }

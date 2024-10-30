@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RolRepositoryJpa extends JpaRepository<RolSql, Long> {
-    Optional<RolSql> findByRole(String role);
+    Optional<RolSql> findByRol(String rol);
 
 }

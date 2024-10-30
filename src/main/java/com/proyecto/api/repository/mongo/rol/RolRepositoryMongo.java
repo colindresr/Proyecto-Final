@@ -55,7 +55,7 @@ public class RolRepositoryMongo implements RolRepository {
 
     @Override
     public Optional<Rol> findRolByName(String roleName) {
-        Optional<RolMongo> roleMongo = mongo.findByRole(roleName);
+        Optional<RolMongo> roleMongo = mongo.findByRol(roleName);
         return roleMongo.map(rolUtil::rolMongoToRol);
     }
 }

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface RolRepositoryJpaMongo extends MongoRepository <RolMongo, String> {
 
-    Optional<RolMongo> findByRole(String role);
+    Optional<RolMongo> findByRol(String rol);
 
 }
