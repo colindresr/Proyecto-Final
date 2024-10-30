@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/auth/signup").permitAll()
                         .requestMatchers("/api/v1/auth/login").permitAll()
                         .requestMatchers("/api/v1/user/**").authenticated()
-                        .requestMatchers("/api/v1/role/**").permitAll()
+                        .requestMatchers("/api/v1/rol/**").permitAll()
                         .requestMatchers("/api/v1/book/**").authenticated()
                         .requestMatchers("/api/v1/loan/**").authenticated()
 
