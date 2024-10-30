@@ -1,5 +1,7 @@
 package com.proyecto.api.modelo.mongo;
 
+import com.proyecto.api.modelo.sql.LoanSqlId;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Id;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +14,8 @@ import java.time.LocalDateTime;
 public class LoanMongo {
 
     @Id
-    private String idLoan;
+    @Embedded
+    private LoanSqlId idLoan;
 
     @Field(name = "loan_date")
     private LocalDateTime loanDate;
@@ -20,6 +23,4 @@ public class LoanMongo {
     @Field(name = "return_date")
     private LocalDateTime returnDate;
 
-    private String idBook;
-    private String idUser;
 }

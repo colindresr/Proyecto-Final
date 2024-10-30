@@ -1,13 +1,19 @@
 package com.proyecto.api.repository;
 
+import com.proyecto.api.modelo.User;
 import com.proyecto.api.modelo.sql.UserSql;
 
 import java.util.List;
+import java.util.Optional;
 
-public class UserRepository {
-/*
-    UserSql createUser(UserSql userSql);
-    List<>
+public interface UserRepository {
 
- */
+    User createUser(User user);
+    List<User> getUsers();
+    Optional<User> findUserById(String id);
+    User updateUser(User user);
+    void deleteUser(String id);
+    Optional<User> findUserByEmail(String email);
+    Optional<User> findUserByUsername(String username);
+
 }
