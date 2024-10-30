@@ -70,7 +70,7 @@ class AuthenticationServiceTest {
 //
 //        assertNotNull(result);
 //        assertEquals("Test User", result.getName());
-//        assertEquals("testuser", result.getUsername());
+//        assertEquals("tester", result.getUsername());
 //        assertEquals("test@example.com", result.getEmail());
 //        assertEquals("encodedPassword", result.getPassword());
 //        assertEquals(1, result.getRoles().size());
