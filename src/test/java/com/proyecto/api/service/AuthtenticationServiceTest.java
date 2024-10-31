@@ -48,35 +48,35 @@ class AuthenticationServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-//    @Test
-//    void testSignup_Success() {
-//        RequestUser userRequest = new RequestUser();
-//        userRequest.setName("Test User");
-//        userRequest.setUsername("testuser");
-//        userRequest.setEmail("test@example.com");
-//        userRequest.setPassword("password");
-//
-//        Rol role = new Rol();
-//        role.setRol("ROLE_USER");
-//
-//        when(passwordEncoder.encode(userRequest.getPassword())).thenReturn("encodedPassword");
-//        when(roleRepository.findRolByName("ROLE_USER")).thenReturn(Optional.of(role));
-//
-//        User user = new User();
-//        user.setRoles(new HashSet<>());
-//        when(userRepository.createUser(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
-//
-//        User result = authenticationService.signup(userRequest);
-//
-//        assertNotNull(result);
-//        assertEquals("Test User", result.getName());
-//        assertEquals("tester", result.getUsername());
-//        assertEquals("test@example.com", result.getEmail());
-//        assertEquals("encodedPassword", result.getPassword());
-//        assertEquals(1, result.getRoles().size());
-//        assertTrue(result.getRoles().contains(role)); // Verificar que el rol está presente
-//        verify(userRepository, times(1)).createUser(any(User.class));
-//    }
+    @Test
+    void testSignup_Success() {
+        RequestUser userRequest = new RequestUser();
+        userRequest.setName("Test User");
+        userRequest.setUsername("testuser");
+        userRequest.setEmail("test@example.com");
+        userRequest.setPassword("password");
+
+        Rol role = new Rol();
+        role.setRol("ROLE_USER");
+
+        when(passwordEncoder.encode(userRequest.getPassword())).thenReturn("encodedPassword");
+        when(roleRepository.findRolByName("ROLE_USER")).thenReturn(Optional.of(role));
+
+        User user = new User();
+        user.setRoles(new HashSet<>());
+        when(userRepository.createUser(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        User result = authenticationService.signup(userRequest);
+
+        assertNotNull(result);
+        assertEquals("Test User", result.getName());
+        assertEquals("testuser", result.getUsername());
+        assertEquals("test@example.com", result.getEmail());
+        assertEquals("encodedPassword", result.getPassword());
+        assertEquals(1, result.getRoles().size());
+        assertTrue(result.getRoles().contains(role)); // Verificar que el rol está presente
+        verify(userRepository, times(1)).createUser(any(User.class));
+    }
 
     @Test
     void testSignup_RoleNotFound() {
@@ -97,28 +97,28 @@ class AuthenticationServiceTest {
         verify(userRepository, never()).createUser(any(User.class));
     }
 
-//    @Test
-//    void testLogin_Success() {
-//        // Arrange
-//        RequestLogin userRequestLogin = new RequestLogin();
-//        userRequestLogin.setUsername("testuser");
-//        userRequestLogin.setPassword("password");
-//
-//        User user = new User();
-//        user.setUsername("testuser");
-//        user.setPassword("encodedPassword");
-//
-//        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(null);
-//        when(userRepository.findUserByUsername(userRequestLogin.getUsername())).thenReturn(Optional.of(user));
-//
-//        // Act
-//        User result = authenticationService.login(userRequestLogin);
-//
-//        // Assert
-//        assertNotNull(result);
-//        assertEquals("testuser", result.getUsername());
-//        verify(userRepository, times(1)).findUserByUsername(userRequestLogin.getUsername());
-//    }
+    @Test
+    void testLogin_Success() {
+        // Arrange
+        RequestLogin userRequestLogin = new RequestLogin();
+        userRequestLogin.setUsername("testuser");
+        userRequestLogin.setPassword("password");
+
+        User user = new User();
+        user.setUsername("testuser");
+        user.setPassword("encodedPassword");
+
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(null);
+        when(userRepository.findUserByUsername(userRequestLogin.getUsername())).thenReturn(Optional.of(user));
+
+        // Act
+        User result = authenticationService.login(userRequestLogin);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("testuser", result.getUsername());
+        verify(userRepository, times(1)).findUserByUsername(userRequestLogin.getUsername());
+    }
 
     @Test
     void testLogin_UserNotFound() {
